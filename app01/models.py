@@ -19,7 +19,12 @@ class MyCharField(models.Field):
 class Person(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=32)
-    age = models.IntegerField()
+    # null=True：数据库中字段是否允许为空；black=True:Admin管理系统中是否允许用户输入为空
+    age = models.IntegerField(null=True,blank=True)
     birth = models.DateTimeField(auto_now_add=True)
     modify_time = models.DateTimeField(auto_now=True)
     phone = MyCharField(max_length=11)
+
+
+    def __str__(self):
+        return '< Person %s-%s>' %(self.id,self.name)
